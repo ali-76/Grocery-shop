@@ -38,7 +38,7 @@ export function IconBox({icon , link = '#' , linkClassname = '' , iconClassname 
       }
 
       {
-        title && <span className={`${hideOnMobile ? "hidden xl:inline-block" : "inline-block"} ${titleClassname}`}>{title}</span>
+        title && <span className={`ml-1 ${hideOnMobile ? "hidden xl:inline-block" : "inline-block"} ${titleClassname}`}>{title}</span>
       }
 
     </Link>
