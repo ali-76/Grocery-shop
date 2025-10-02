@@ -7,61 +7,61 @@ interface Props {
 
 export const browsCategoryMock : Props[] = [
     {
-        icon : "groceries" ,
+        icon : "icon-groceries-1" ,
         link : "#" ,
-        title : "Milk and Dairies"  ,
+        title : "Milks and Dairies"  ,
         path : 7 
     },
     {
-        icon : "dress" ,
+        icon : "icon-drinks-1" ,
+        link : "#" ,
+        title : "Wines & Drinks"  ,
+        path : 5 
+    },
+    {
+        icon : "icon-dress-1" ,
         link : "#" ,
         title : "Clothing & beauty"  ,
         path : 4 
     },
     {
-        icon : "pet-food" ,
-        link : "#" ,
-        title : "Pet Foods & Toy"  ,
-        path : 8 
-    },
-    {
-        icon : "dairy-products" ,
-        link : "#" ,
-        title : "Baking material" ,
-        path : 5 
-    },
-    {
-        icon : "fruit" ,
-        link : "#" ,
-        title : "Fresh Fruit" ,
-        path : 3 
-    },
-    {
-        icon : "drinks" ,
-        link : "#" ,
-        title : "Wines & Drinks" ,
-        path : 5 
-    },
-    {
-        icon : "crab" ,
+        icon : "icon-crab-1" ,
         link : "#" ,
         title : "Fresh Seafood" ,
         path : 9 
     },
     {
-        icon : "sweet" ,
+        icon : "icon-pet-food-1" ,
+        link : "#" ,
+        title : "Pet Foods & Toy" ,
+        path : 8
+    },
+    {
+        icon : "icon-sweet-1" ,
         link : "#" ,
         title : "Fast food" ,
-        path : 7 
+        path : 7
     },
     {
-        icon : "grocery" ,
+        icon : "icon-dairy-products-1" ,
+        link : "#" ,
+        title : "Baking material" ,
+        path : 5
+    },
+    {
+        icon : "icon-grocery-1" ,
         link : "#" ,
         title : "Vegetables" ,
-        path : 7 
+        path : 7
     },
     {
-        icon : "milk-products" ,
+        icon : "icon-fruit-1" ,
+        link : "#" ,
+        title : "Fresh Fruit" ,
+        path : 3
+    },
+    {
+        icon : "icon-milk-products-1" ,
         link : "#" ,
         title : "Bread and Juice" ,
         path : 5 
