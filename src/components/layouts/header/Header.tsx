@@ -15,10 +15,10 @@ export function Header() {
 
         <ul className="hidden lg:flex gap-5">
           <li>
-            <IconBox icon={"icon-user"} size={24} title={"Account"} linkClassname={"gap-2"} titleClassname={"text-medium text-gray-500 font-lato"} hideOnMobile = {true} />
+            <IconBox icon={"icon-user"} size={24} title={"Account"} linkClassName={"gap-2"} titleClassName={"text-medium text-gray-500 font-lato"} hideOnMobile = {true} />
           </li>
           <li>
-            <IconBox icon={"icon-shopping-cart"} size={24} title={"Card"} linkClassname={"gap-2"} titleClassname={"text-medium text-gray-500 font-lato"} hideOnMobile = {true} badge={4} />
+            <IconBox icon={"icon-shopping-cart"} size={24} title={"Card"} linkClassName={"gap-2"} titleClassName={"text-medium text-gray-500 font-lato"} hideOnMobile = {true} badge={4} />
           </li>
         </ul>
         
@@ -34,7 +34,7 @@ export function Header() {
           <Menu />
 
           <div className="hidden lg:flex items-center shrink-0 gap-3">
-            <IconBox link={"tel:19008888"} icon={"icon-headset"} size={30} iconClassname={"xl:text-[32px] 2xl:text-[36px] aspect-square"}/>
+            <IconBox link={"tel:19008888"} icon={"icon-headset"} size={30} iconClassName={"xl:text-[32px] 2xl:text-[36px] aspect-square"}/>
             <div>
               <Link href="tel:19008888" className="text-green-200 lg:text-heading6 xl:text-heading5 2xl:text-heading4">1900-8888</Link>
               <div className="font-lato text-xsmall"><span className="hidden xl:inline-block">24/7 </span>Support Center</div>
@@ -43,27 +43,16 @@ export function Header() {
         </div>
 
         <div className="container flex justify-between lg:hidden pt-[20px] pb-[16px] items-center">
-          <div className="border-[1px] border-green-150 rounded-[5px] w-full max-w-[220px] p-[6px]">
+          <div className="border-[1px] border-green-150 rounded-[5px] w-full max-w-[250px] p-[6px]">
             <SearchForm />
-            {/* <form name="search-form" action="#" method="post" className="flex items-center">
-              <input type="text" name="search_text" placeholder="Search for items" className="text-xsmall text-gray-400 border-gray-300 w-full focus:outline-none" />
-              <button type="submit"><i className="icon-search text-[16px]"></i></button>
-            </form> */}
           </div>
 
           <ul className="flex gap-5">
             <li>
               <IconBox link={"#"} icon={"icon-user"} size={24}/>
-              {/* <a href="#"><i className="icon-user text-[24px]"></i></a> */}
-              {/* <div className="hidden xl:inline-block text-medium text-gray-500 font-lato">Account</div> */}
             </li>
             <li>
               <IconBox link={"#"} icon={"icon-shopping-cart"} size={24} badge={4}/>
-              {/* <div className="relative">
-                <span className="absolute -top-[10px] -right-[10px] w-[20px] h-[20px] bg-green-200 rounded-full flex justify-center items-center text-white text-xsmall">4</span>
-                <a href="#"><i className="icon-shopping-cart text-[24px]"></i></a>
-              </div> */}
-              {/* <div className="hidden xl:inline-block text-medium text-gray-500 font-lato">Card</div> */}
             </li>
           </ul>
         </div>
