@@ -8,7 +8,7 @@ export function Menu() {
   return (
     <>
       <div id="all_categories" className="flex relative cursor-pointer bg-green-200 gap-2.5 text-white px-4 py-3 rounded-[5px] items-center">
-        <IconBox icon={"icon-apps"} size={24} title={"Browse All Categories"} linkClassname={"gap-2"} titleClassname={"text-medium"}/>
+        <IconBox icon={"icon-apps"} size={24} title={"Browse All Categories"} linkClassName={"gap-2"} titleClassName={"text-medium"}/>
         <IconBox icon={"icon-angle-small-down"} size={24} />
 
         <div id="all_categories_box" className="hidden absolute z-20 bg-white left-0 top-16 w-[500px] rounded-[5px] border-[1px] border-green-300 p-[30px] hover:cursor-default">
@@ -16,12 +16,12 @@ export function Menu() {
             {
               browsCategoryMock.map((item , index) => {
                 return(
-                  <IconBox key={index} icon={item.icon} size={30} link={item.link} path={item.path} title={item.title} linkClassname={"gap-3.5 rounded-[5px] lg:border-[1px] lg:border-gray-300 py-2.5 basis-[calc(50%-8px)] justify-start pl-4 lg:hover:border-green-300 transition-all duration-300"} titleClassname={"text-heading-sm text-blue-300"}/>
+                  <IconBox key={index} icon={item.icon} size={30} link={item.link} path={item.path} title={item.title} linkClassName={"gap-3.5 rounded-[5px] lg:border-[1px] lg:border-gray-300 py-2.5 basis-[calc(50%-8px)] justify-start pl-4 lg:hover:border-green-300 transition-all duration-300"} titleClassName={"text-heading-sm text-blue-300"}/>
                 )
               })
             }
 
-            <IconBox icon={"icon-add"} size={24} title={"More Categories"}linkClassname={"m-auto mt-[17px] gap-4"} titleClassname={"text-heading-sm text-blue-300"} />
+            <IconBox icon={"icon-add"} size={24} title={"More Categories"}linkClassName={"m-auto mt-[17px] gap-4"} titleClassName={"text-heading-sm text-blue-300"} />
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ export function Menu() {
                   <li key={index} className="opacity-80 hover:opacity-100 transition-all duration-200">
                     {
                       item.icon ?
-                        <IconBox {...item} titleClassname={"text-heading6 lg:text-heading-sm xl:text-heading6"}/>
+                        <IconBox {...item} titleClassName={"text-heading6 lg:text-heading-sm xl:text-heading6"}/>
                         : <Link href={item.link} className="flex items-center gap-1">{item.title}</Link>
                     }
                   </li>
