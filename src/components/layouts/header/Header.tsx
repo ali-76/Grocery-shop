@@ -15,10 +15,10 @@ export function Header() {
 
         <ul className="hidden lg:flex gap-5">
           <li>
-            <IconBox icon={"icon-user"} size={24} title={"Account"} linkClassName={"gap-2"} titleClassName={"text-medium text-gray-500 font-lato"} hideOnMobile = {true} />
+            <IconBox icon={"icon-user"} link="#" size={24} title={"Account"} linkClassName={"gap-2"} titleClassName={"text-medium text-gray-500 font-lato"} hideOnMobile = {true} />
           </li>
           <li>
-            <IconBox icon={"icon-shopping-cart"} size={24} title={"Card"} linkClassName={"gap-2"} titleClassName={"text-medium text-gray-500 font-lato"} hideOnMobile = {true} badge={4} />
+            <IconBox icon={"icon-shopping-cart"} link="#" size={24} title={"Card"} linkClassName={"gap-2"} titleClassName={"text-medium text-gray-500 font-lato"} hideOnMobile = {true} badge={4} />
           </li>
         </ul>
         
