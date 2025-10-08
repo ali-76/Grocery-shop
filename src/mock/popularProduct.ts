@@ -9,8 +9,8 @@ export const popularProductMock : simpleProductType[] = [
         rate : '4.0' ,
         weight : 500 ,
         unit : "gram",
-        disconnect : 2.51 ,
-        price : 2.8
+        disconnect : 3.85 ,
+        price : 4.1
     },
     {
         badge : "Hot",
@@ -20,8 +20,8 @@ export const popularProductMock : simpleProductType[] = [
         rate : '4.0' ,
         weight : 500 ,
         unit : "gram",
-        disconnect : 2.51 ,
-        price : 2.8
+        disconnect : 3.58 ,
+        price : 3.85
     },
     {
         badge : "Sale",
@@ -31,8 +31,8 @@ export const popularProductMock : simpleProductType[] = [
         rate : '4.0' ,
         weight : 500 ,
         unit : "gram",
-        disconnect : 2.51 ,
-        price : 2.8
+        disconnect : 10.23 ,
+        price : 10.82
     },
     {
         img : "/assets/images/products/paper.png",
@@ -41,8 +41,8 @@ export const popularProductMock : simpleProductType[] = [
         rate : '4.0' ,
         weight : 500 ,
         unit : "gram",
-        disconnect : 2.51 ,
-        price : 2.8
+        disconnect : 6.21 ,
+        price : 7.25
     },
     {
         img : "/assets/images/products/lemon.png",
@@ -51,8 +51,8 @@ export const popularProductMock : simpleProductType[] = [
         rate : '4.0' ,
         weight : 500 ,
         unit : "gram",
-        disconnect : 2.51 ,
-        price : 2.8
+        disconnect : 1.65 ,
+        price : 2.05
     },
     {
         badge : "-17%",
@@ -62,7 +62,7 @@ export const popularProductMock : simpleProductType[] = [
         rate : '4.0' ,
         weight : 500 ,
         unit : "gram",
-        disconnect : 2.51 ,
-        price : 2.8
+        disconnect : 3.55 ,
+        price : 3.95
     }
 ]

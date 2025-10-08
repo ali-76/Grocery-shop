@@ -38,12 +38,22 @@ export function SimpleProductCard({item} : Props) {
         <div className="font-lato text-xsmall text-gray-500">{item.weight} {item.unit}</div>
       </div>
       <div className="flex items-center justify-between mt-3">
-        <div>
+        <div className="flex flex-wrap">
           <span className="text-heading5 text-green-200 mr-1">${item.disconnect}</span>
           <span className="text-heading-sm line-through text-gray-500">${item.price}</span>
         </div>
         <div className="add-product">
-          <button className="flex items-center justify-center text-heading-sm text-green-200 border-[1px] rounded-[4px] bg-green-150 px-[10px] py-[5px]">Adds +</button>
+          <button className="
+            flex items-center justify-center
+            text-heading-xs sm:text-heading-sm
+            text-green-200 bg-green-150
+            border rounded px-2.5 py-1.5
+            hover:bg-green-200 hover:text-green-900
+            transition duration-300 ease-in-out
+          ">
+            <span className="sm:hidden">+</span>
+            <span className="hidden sm:flex">Adds +</span>
+          </button>
           <div className="input-product__container hidden border-[1px] rounded-[4px] border-green-300 text-green-300 h-[30px] p-[3px]">
             <input type="number" value="1" className="input-product h-[24px] w-[50px] border-0 focus:outline-none text-center" />
             <div className="flex flex-col justify-between">
