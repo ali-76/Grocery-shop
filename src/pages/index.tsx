@@ -1,5 +1,6 @@
 import { Banner, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
 import { popularProductMock } from "@/mock/popularProduct";
+import { popularFruitMock } from "@/mock/popularFruit";
 
 export default function Home() {
   return (
@@ -31,6 +32,17 @@ export default function Home() {
           </div>
         </div>
         <SimpleProductSlider items={popularProductMock} nextEl={".swiper-nav-right"} prevEl={".swiper-nav-left"}/>
+      </Section>
+
+      <Section>
+        <div className="flex justify-between mb-[50px]">
+          <h2 className="text-heading3 text-blue-300">Popular Fruits</h2>
+          <div className="flex items-center gap-3">
+            <IconBox icon="icon-angle-small-left" iconClassName="swiper-nav-left2 cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white" size={24} />
+            <IconBox icon="icon-angle-small-right" iconClassName="swiper-nav-right2 cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white" size={24} />
+          </div>
+        </div>
+        <SimpleProductSlider items={popularFruitMock} nextEl={".swiper-nav-right2"} prevEl={".swiper-nav-left2"}/>
       </Section>
     </main>
   );

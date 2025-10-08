@@ -16,6 +16,7 @@ export function SimpleProductSlider({items , nextEl , prevEl} : Props) {
         spaceBetween={16}
         slidesPerView={2}
         autoplay = {true}
+        loop = {true}
         navigation = {{
             nextEl : nextEl,
             prevEl : prevEl
