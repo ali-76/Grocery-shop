@@ -1,6 +1,7 @@
 import { simpleProductType } from "@/types/simpleProductType";
-import { IconBox } from "../../ul";
+import { IconBox, Rating } from "../../ul";
 import { ImageView } from "../../image-view";
+import Link from "next/link";
 
 interface Props {
   item : simpleProductType
@@ -24,16 +25,9 @@ export function SimpleProductCard({item} : Props) {
       <ImageView src={item.img} alt="Product image" width={717} height={526} className="m-auto w-full aspect-[3/2] mb-[28px]" />
       <div className="flex flex-col gap-2">
         <div className="text-gray-500 text-xsmall">{item.shopName}</div>
-        <h3 className="text-heading-sm text-blue-300 min-h-[33px] line-clamp-2 overflow-hidden">{item.title}</h3>
+        <Link href={"#"}><h3 className="text-heading-sm text-blue-300 min-h-[33px] line-clamp-2 overflow-hidden">{item.title}</h3></Link>
         <div className="flex gap-4">
-          <ul className="flex gap-1">
-            <li className="flex cursor-pointer"><IconBox icon="icon-star-full" size={12}></IconBox></li>
-            <li className="flex cursor-pointer"><IconBox icon="icon-star-full" size={12}></IconBox></li>
-            <li className="flex cursor-pointer"><IconBox icon="icon-star-full" size={12}></IconBox></li>
-            <li className="flex cursor-pointer"><IconBox icon="icon-star-full" size={12}></IconBox></li>
-            <li className="flex cursor-pointer"><IconBox icon="icon-star-empty" size={12}></IconBox></li>
-          </ul>
-          <div className="text-xsmall text-gray-500 font-lato">( {item.rate} )</div>
+          <Rating rate={item.rate} />
         </div>
         <div className="font-lato text-xsmall text-gray-500">{item.weight} {item.unit}</div>
       </div>

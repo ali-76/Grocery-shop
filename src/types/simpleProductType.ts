@@ -3,7 +3,7 @@ export interface simpleProductType {
     img : string;
     shopName : string;
     title : string;
-    rate : string;
+    rate : number;
     weight : number;
     unit : string;
     disconnect : number;
