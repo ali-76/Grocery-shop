@@ -31,11 +31,11 @@ export function Rating({
 
   return (
     <div className="flex items-center" aria-label={ariaLabel ?? defaultAria}>
-      <ul className="flex" style={{ gap: `${gap}px`, display: "flex", padding: 0, margin: 0, listStyle: "none" }}>
+      <ul className="flex p-0 m-0 list-none" style={{ gap: `${gap}px`}}>
         {indices.map((idx) => {
           const fill = getFill(idx);
           return (
-            <li key={idx} style={{ display: "inline-flex", alignItems: "center" }}>
+            <li key={idx} className="inline-flex items-center">
               <Star fillPercent={fill} size={size} idx={idx} />
             </li>
           );
@@ -43,7 +43,7 @@ export function Rating({
       </ul>
 
       {showNumber && (
-        <div className="text-xsmall text-gray-500 font-lato mr-2" style={{ marginLeft: 8 }}>
+        <div className="text-xsmall text-gray-500 font-lato mr-2 ml-2">
           ( {clampedRate.toFixed(1)} )
         </div>
       )}
