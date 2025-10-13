@@ -6,6 +6,6 @@ export interface simpleProductType {
     rate : number;
     weight : number;
     unit : string;
-    disconnect : number;
+    sale_price? : number;
     price : number;
 }
