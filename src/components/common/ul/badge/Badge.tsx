@@ -5,18 +5,24 @@ interface Props  {
 }
 
 export function Badge({title , price , sale_price}: Props) {
-    let x;
+    let percentage:number = 0;
+    let badgeTitle = title;
+
     if(sale_price){
-        x = Math.round(100 - (price / sale_price * 100))
+        percentage = Math.round((price - sale_price) / price * 100)
+
+        if(percentage > 50){
+            badgeTitle = "Hot"
+        }
     }
 
     return(
         <div>
             {
-                title ?
-                    <div className={`badge ${title.toLowerCase() == "hot" ? 'badge--hot' : 'badge--sale'} absolute left-0 top-0 lg:top-5 rounded-tl-[10px] lg:rounded-tl-none`}>{title}</div>
+                badgeTitle ?
+                    <div className={`badge ${badgeTitle.toLowerCase() == "hot" ? 'badge--hot' : 'badge--sale'} absolute left-0 top-0 lg:top-5 rounded-tl-[10px] lg:rounded-tl-none`}>{badgeTitle}</div>
                 : sale_price ?
-                <div className={`badge badge--off absolute left-0 top-0 lg:top-5 rounded-tl-[10px] lg:rounded-tl-none`}>{}</div>
+                <div className={`badge badge--off absolute left-0 top-0 lg:top-5 rounded-tl-[10px] lg:rounded-tl-none`}>{percentage} %</div>
                 :
                 <></>
             }
