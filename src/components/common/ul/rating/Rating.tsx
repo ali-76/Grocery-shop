@@ -43,7 +43,7 @@ export function Rating({
       </ul>
 
       {showNumber && (
-        <div className="text-xsmall text-gray-500 font-lato mr-2 ml-2">
+        <div className="hidden sm:flex text-xsmall text-gray-500 font-lato mr-2 ml-2">
           ( {clampedRate.toFixed(1)} )
         </div>
       )}

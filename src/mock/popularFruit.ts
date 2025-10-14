@@ -19,7 +19,7 @@ export const popularFruitMock : simpleProductType[] = [
         weight : 500 ,
         unit : "gram",
         sale_price : 3.58 ,
-        price : 3.85
+        price : 15.85
     },
     {
         badge : "Sale",

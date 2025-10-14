@@ -8,4 +8,6 @@ export interface simpleProductType {
     unit : string;
     sale_price? : number;
     price : number;
+    sold? : number;
+    total? : number;
 }

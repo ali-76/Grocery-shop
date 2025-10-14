@@ -1,6 +1,6 @@
 import { simpleProductType } from "@/types/simpleProductType";
-import { Badge, IconBox, Rating } from "../../ul";
-import { ImageView } from "../../image-view";
+import { Badge, IconBox, Rating } from "@/components";
+import { ImageView } from "@/components";
 import Link from "next/link";
 
 interface Props {
@@ -25,7 +25,7 @@ export function SimpleProductCard({item} : Props) {
       <ImageView src={item.img} alt="Product image" width={717} height={526} className="m-auto w-full aspect-[3/2] mb-[28px]" />
       <div className="flex flex-col gap-2">
         <div className="text-gray-500 text-xsmall">{item.shopName}</div>
-        <Link href={"#"}><h3 className="text-heading-sm text-blue-300 min-h-[33px] line-clamp-2 overflow-hidden">{item.title}</h3></Link>
+        <Link href={"#"}><h3 className="text-heading-sm text-blue-300 min-h-[33px] line-clamp-2 overflow-hidden" title={item.title}>{item.title}</h3></Link>
         <div className="flex gap-4">
           <Rating rate={item.rate} />
         </div>
@@ -35,35 +35,43 @@ export function SimpleProductCard({item} : Props) {
         <div className="flex flex-wrap">
         {
           item.sale_price ?
-          <>
+          <div className="flex flex-col sm:flex-row min-h-10">
             <span className="text-heading5 text-green-200 mr-1">${item.sale_price}</span>
             <span className="text-heading-sm line-through text-gray-500">${item.price}</span>
-          </>
+          </div>
           :
-          <span className="text-heading5 text-green-200 mr-1">${item.price}</span>
+          <span className="text-heading5 text-green-200 mr-1 min-h-10">${item.price}</span>
         }
         </div>
-        <div className="add-product">
-          <button className="
-            flex items-center justify-center
-            text-heading-xs sm:text-heading-sm
-            text-green-200 bg-green-150
-            border rounded px-2.5 py-1.5
-            hover:bg-green-200 hover:text-green-900
-            transition duration-300 ease-in-out
-          ">
-            <span className="sm:hidden">+</span>
-            <span className="hidden sm:flex">Adds +</span>
-          </button>
-          <div className="input-product__container hidden border-[1px] rounded-[4px] border-green-300 text-green-300 h-[30px] p-[3px]">
-            <input type="number" value="1" className="input-product h-[24px] w-[50px] border-0 focus:outline-none text-center" />
-            <div className="flex flex-col justify-between">
-              <IconBox icon={"icon-angle-small-up"} size={10} iconClassName={"up"} />
-              <IconBox icon={"icon-angle-small-down"} size={10} iconClassName={"down"} />
+      </div> 
+        {
+          item.total && item.sold ?
+          <div className="flex flex-col">
+            <div className="mt-[15px] bg-gray-200 h-[4px] w-full rounded-[2px]">
+              <div style={{width:`${item.sold/item.total*100}%`}} className="bg-green-200 h-[4px] rounded-[2px]"></div>
+            </div>
+            <div className="mt-2.5 font-lato text-blue-300 text-xsmall">Sold: {item.sold}/{item.total}</div>
+            <div className="mt-[23px]">
+              <button className="flex justify-center items-center gap-2 xl:text-heading-sm text-white border-[1px] w-full rounded-[4px] bg-green-200 hover:bg-yellow-100 px-2 py-2 lg:py-[14px]">
+                <IconBox icon="icon-shopping-cart" title="Add To Card" titleClassName="text-heading-sm"/>
+              </button>
             </div>
           </div>
-        </div>
-      </div>
+          :
+          <div className="add-product">
+            <button className="flex items-center justify-center text-heading-xs sm:text-heading-sm text-green-200 bg-green-150 border rounded px-2.5 py-1.5 hover:bg-green-200 hover:text-green-900 transition duration-300 ease-in-out">
+              <span className="sm:hidden">+</span>
+              <span className="hidden sm:flex">Adds +</span>
+            </button>
+            <div className="input-product__container hidden border-[1px] rounded-[4px] border-green-300 text-green-300 h-[30px] p-[3px]">
+              <input type="number" value="1" className="input-product h-[24px] w-[50px] border-0 focus:outline-none text-center" />
+              <div className="flex flex-col justify-between">
+                <IconBox icon={"icon-angle-small-up"} size={10} iconClassName={"up"} />
+                <IconBox icon={"icon-angle-small-down"} size={10} iconClassName={"down"} />
+              </div>
+            </div>
+          </div>
+        }
     </div>
   );
 }
