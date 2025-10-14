@@ -1,5 +1,5 @@
 import { productVerticalType } from "@/types/productVerticalType";
-import { MiniProductCard } from "../product-card";
+import { MiniProductCard } from "@/components";
 
 interface Props {
   itemCards: productVerticalType[];
