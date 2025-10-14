@@ -1,6 +1,6 @@
-import { ProductDealsCard, SimpleProductCard } from "@/components/common";
+import { ProductDealsCard } from "@/components/common";
 import { simpleProductType } from "@/types/simpleProductType";
-import { Autoplay, Navigation } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface Props  {
@@ -10,7 +10,7 @@ interface Props  {
 export function DealsOfTheDaysSlider({items} : Props) {
    return (
         <Swiper
-        modules={[Autoplay , Navigation]}
+        modules={[Autoplay]}
         spaceBetween={16}
         slidesPerView={1}
         autoplay={{

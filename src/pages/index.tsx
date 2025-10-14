@@ -1,4 +1,4 @@
-import { Banner, BestSellerSliders, DealsOfTheDaysSlider, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
+import { Banner, BestSellerSliders, BottomSlider, DealsOfTheDaysSlider, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
 import { popularProductMock } from "@/mock/popularProduct";
 import { popularFruitMock } from "@/mock/popularFruit";
 import { bestSellersProductMock } from "@/mock/bestSellersProduct";
@@ -69,6 +69,10 @@ export default function Home() {
           <a className="flex items-center" href="#">All Deals <i className="icon-angle-small-right text-[24px]"></i></a>
         </div>
         <DealsOfTheDaysSlider items={dealsOfTheDaysMock}/>
+      </Section>
+
+      <Section>
+        <BottomSlider/>
       </Section>
     </main>
   );
