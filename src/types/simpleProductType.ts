@@ -1,7 +1,7 @@
 export interface simpleProductType {
     badge? : string;
     img : string;
-    shopName : string;
+    shopName? : string;
     title : string;
     rate : number;
     weight : number;
@@ -10,4 +10,5 @@ export interface simpleProductType {
     price : number;
     sold? : number;
     total? : number;
+    timer? : number;
 }

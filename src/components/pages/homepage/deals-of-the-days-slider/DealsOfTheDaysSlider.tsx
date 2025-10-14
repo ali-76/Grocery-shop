@@ -1,42 +1,36 @@
-import { SimpleProductCard } from "@/components/common";
+import { ProductDealsCard, SimpleProductCard } from "@/components/common";
 import { simpleProductType } from "@/types/simpleProductType";
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface Props  {
   items : simpleProductType[];
-  nextEl? : string;
-  prevEl? : string;
 }
 
-export function SimpleProductSlider({items , nextEl , prevEl} : Props) {
+export function DealsOfTheDaysSlider({items} : Props) {
    return (
         <Swiper
         modules={[Autoplay , Navigation]}
         spaceBetween={16}
-        slidesPerView={2}
+        slidesPerView={1}
         autoplay={{
           delay: 2500,
           disableOnInteraction: false,
           pauseOnMouseEnter: true,
         }}
         loop = {true}
-        navigation = {{
-            nextEl : nextEl,
-            prevEl : prevEl
-        }}
         breakpoints = {{
           768: {
-            slidesPerView: 3,
+            slidesPerView: 2,
             spaceBetween: 18
           },
           1024: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 22
           },
           1280: {
-            slidesPerView: 5,
-            spaceBetween: 24
+            slidesPerView: 4,
+            spaceBetween: 22
           }
         }}
         >
@@ -44,8 +38,8 @@ export function SimpleProductSlider({items , nextEl , prevEl} : Props) {
             {
                 items.map((itemCard : simpleProductType , index : number) => {
                     return(
-                        <SwiperSlide key={index}>
-                            <SimpleProductCard item={itemCard}/>
+                        <SwiperSlide key={index} className="mt-[47px]">
+                            <ProductDealsCard item={itemCard}/>
                         </SwiperSlide>
                     )
                 })

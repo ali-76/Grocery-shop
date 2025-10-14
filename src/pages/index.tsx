@@ -1,7 +1,8 @@
-import { Banner, BestSellerSliders, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
+import { Banner, BestSellerSliders, DealsOfTheDaysSlider, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
 import { popularProductMock } from "@/mock/popularProduct";
 import { popularFruitMock } from "@/mock/popularFruit";
 import { bestSellersProductMock } from "@/mock/bestSellersProduct";
+import { dealsOfTheDaysMock } from "@/mock/dealsOfTheDays";
 
 export default function Home() {
   return (
@@ -60,6 +61,14 @@ export default function Home() {
           </div>
           <BestSellerSliders items={bestSellersProductMock}/>
         </div>
+      </Section>
+      
+      <Section>
+        <div className="flex justify-between items-center">
+          <h2 className="text-heading6 md:text-heading5 lg:text-heading4 xl:text-heading3 text-blue-300">Deals Of The Days</h2>
+          <a className="flex items-center" href="#">All Deals <i className="icon-angle-small-right text-[24px]"></i></a>
+        </div>
+        <DealsOfTheDaysSlider items={dealsOfTheDaysMock}/>
       </Section>
     </main>
   );

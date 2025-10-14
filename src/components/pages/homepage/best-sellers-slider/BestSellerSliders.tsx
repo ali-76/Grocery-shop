@@ -13,7 +13,11 @@ export function BestSellerSliders({items} : Props) {
         modules={[Autoplay]}
         spaceBetween={16}
         slidesPerView={2}
-        autoplay = {true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
         loop = {true}
         breakpoints = {{
             640: {
