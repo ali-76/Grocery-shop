@@ -10,7 +10,7 @@ import type { AppProps } from "next/app";
 import { Lato, Quicksand } from 'next/font/google'
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
- import { ToastContainer, toast } from 'react-toastify';
+ import { ToastContainer , Bounce } from 'react-toastify';
 
 const quicksand = Quicksand({
   subsets: ['latin']
@@ -44,7 +44,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <QueryClientProvider client={queryClient}>
         <Layout>
           <Component {...pageProps} />
-          <ToastContainer
+          <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick={false} rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light" transition={Bounce} />
         </Layout>
       </QueryClientProvider>
     </>
