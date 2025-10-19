@@ -1,10 +1,36 @@
+import { getMenuApiCall } from "@/api/config/Menu";
 import { IconBox } from "@/components/common";
 import {browsCategoryMock} from "@/mock/browsCategory";
 import {menuMock} from "@/mock/menu";
+import { EntityType, MenuItemType, MenuType, PopulateType } from "@/types";
+import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 
 export function Menu() {
   //TODO load menu data from api
+
+  const {data : menuData} = useQuery({queryKey : [getMenuApiCall.name] , queryFn : () => getMenuApiCall()})
+
+  let mainMenuItems : null | PopulateType<MenuItemType> = null
+
+  if(menuData){
+    const findMenu = menuData.data.filter((item : EntityType<MenuType>) => item.attributes.position === "main_menu")    
+    if(findMenu){
+      mainMenuItems = findMenu[0].attributes.menu_items
+      mainMenuItems.data.sort((a : EntityType<MenuItemType> ,b : EntityType<MenuItemType>) => {
+        if (a.attributes.rank < b.attributes.rank){
+          return -1
+        }
+        if (a.attributes.rank > b.attributes.rank){
+          return 1
+        }
+        return 0
+      })
+    }
+  }
+
+  
+
   return (
     <>
       <div id="all_categories" className="flex relative cursor-pointer bg-green-200 gap-2.5 text-white px-4 py-3 rounded-[5px] items-center">
@@ -25,7 +51,25 @@ export function Menu() {
           </div>
         </div>
       </div>
+      <nav id="main_menu">
+        <ul className="flex flex-col lg:flex-row items-start lg:items-center text-heading6 lg:text-heading-sm 2xl:text-heading6 gap-[32px] mt-[32px] lg:mt-0 lg:gap-3 xl:gap-5 2xl:gap-10">
+            {
+              mainMenuItems && mainMenuItems.data.map((item : EntityType<MenuItemType> , index) => {
+                return (
+                  <li key={index} className="opacity-80 hover:opacity-100 transition-all duration-200">
+                    {
+                      item.attributes.icon_name ?
+                        <IconBox icon={item.attributes.icon_name} size={24} link={item.attributes.link} title={item.attributes.title} titleClassName={"text-heading6 lg:text-heading-sm xl:text-heading6"} />
+                        : <Link href={item.attributes.link} className="flex items-center gap-1">{item.attributes.title}</Link>
+                    }
+                  </li>
+                )
+              })
+            }
+        </ul>
+      </nav>
 
+      {/*
       <nav id="main_menu">
         <ul className="flex flex-col lg:flex-row items-start lg:items-center text-heading6 lg:text-heading-sm 2xl:text-heading6 gap-[32px] mt-[32px] lg:mt-0 lg:gap-3 xl:gap-5 2xl:gap-10">
             {
@@ -42,7 +86,8 @@ export function Menu() {
               })
             }
         </ul>
-      </nav>
+      </nav> 
+      */}
     </>
   )
 }

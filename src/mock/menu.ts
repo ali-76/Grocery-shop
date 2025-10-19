@@ -17,7 +17,7 @@ export const menuMock : Props[] = [
     {
         link : "#",
         icon : "",
-        title : "Home"
+        title : "Vegetables"
     },
     {
         link : "#",
@@ -27,6 +27,6 @@ export const menuMock : Props[] = [
     {
         link : "#",
         icon : "",
-        title : "Vegetables"
-    }
+        title : "Home"
+    },
 ]

@@ -2,14 +2,13 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 const apiClient = axios.create({
-  baseURL: 'https://nest.navaxcollege.com/api/',
+  baseURL: 'https://nest.navaxcollege.com/api',
   timeout: 120000,
-  headers: {'X-Custom-Header': 'foobar'}
 });
 
 
 apiClient.interceptors.response.use(function onFulfilled(response) {
-  return response;
+  return response.data;
 }, function onRejected(error) {
 
   if (error.response) {

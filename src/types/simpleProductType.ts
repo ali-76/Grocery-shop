@@ -1,3 +1,4 @@
+//TODO re-check after finish project
 export interface simpleProductType {
     badge? : string;
     img : string;
