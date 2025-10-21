@@ -1,60 +1,62 @@
-import { getMenuApiCall } from "@/api/config/Menu";
 import { IconBox } from "@/components/common";
-import {browsCategoryMock} from "@/mock/browsCategory";
-import {menuMock} from "@/mock/menu";
-import { EntityType, MenuItemType, MenuType, PopulateType } from "@/types";
-import { useQuery } from "@tanstack/react-query";
+import { useMenu } from "@/hooks/use-menu";
+import { EntityType, MenuItemType } from "@/types";
 import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import { useOverlay } from "@/hooks/use-overlay";
+
 
 export function Menu() {
-  //TODO load menu data from api
 
-  const {data : menuData} = useQuery({queryKey : [getMenuApiCall.name] , queryFn : () => getMenuApiCall()})
+  const {data : mainMenuItems} = useMenu({position : "main_menu"})
+  const {data : categoryMenuItems } = useMenu({position : "brows-category"})
 
-  let mainMenuItems : null | PopulateType<MenuItemType> = null
+  let [showCategoryMenu , setShowCategoryMenu] = useState<boolean>(false)
 
-  if(menuData){
-    const findMenu = menuData.data.filter((item : EntityType<MenuType>) => item.attributes.position === "main_menu")    
-    if(findMenu){
-      mainMenuItems = findMenu[0].attributes.menu_items
-      mainMenuItems.data.sort((a : EntityType<MenuItemType> ,b : EntityType<MenuItemType>) => {
-        if (a.attributes.rank < b.attributes.rank){
-          return -1
-        }
-        if (a.attributes.rank > b.attributes.rank){
-          return 1
-        }
-        return 0
-      })
-    }
+  useOverlay({
+    onClick(){
+      setShowCategoryMenu(false);
+    },
+  })
+
+  function categoryBtnClickHandler (e : React.MouseEvent<HTMLDivElement>){
+    e.stopPropagation()    
+    setShowCategoryMenu((prevState) => !prevState)
   }
 
-  
+  function categoryBodyClickHandler (e : React.MouseEvent<HTMLDivElement>){
+    e.stopPropagation()
+  }
 
   return (
     <>
-      <div id="all_categories" className="flex relative cursor-pointer bg-green-200 gap-2.5 text-white px-4 py-3 rounded-[5px] items-center">
-        <IconBox icon={"icon-apps"} size={24} title={"Browse All Categories"} linkClassName={"gap-2"} titleClassName={"text-medium"}/>
-        <IconBox icon={"icon-angle-small-down"} size={24} />
+      <div className="relative">
+        <div onClick={categoryBtnClickHandler} className="flex cursor-pointer bg-green-200 hover:bg-green-300 gap-2.5 text-white px-4 py-3 rounded-[5px] items-center transition-all duration-200">
+          <IconBox icon={"icon-apps"} size={24} title={"Browse All Categories"} linkClassName={"gap-2"} titleClassName={"text-medium"}/>
+          <IconBox icon={`icon-angle-small-down`} iconClassName={`${showCategoryMenu && "-rotate-180"} transition-all duration-300`} size={24} />
+        </div>
 
-        <div id="all_categories_box" className="hidden absolute z-20 bg-white left-0 top-16 w-[500px] rounded-[5px] border-[1px] border-green-300 p-[30px] hover:cursor-default">
-          <div id="all_cat_inner_box" className="flex flex-wrap justify-between gap-y-[15px]">
+        <div onClick={categoryBodyClickHandler} className={`${!showCategoryMenu && "hidden"} lg:absolute z-20 bg-white left-0 top-16 lg:w-[500px] rounded-[5px] lg:border-[1px] border-green-300 lg:p-[30px] hover:cursor-default`}>
+          <div className="flex flex-col lg:flex-row flex-wrap justify-between gap-y-[15px]">
             {
-              browsCategoryMock.map((item , index) => {
+              categoryMenuItems &&
+              categoryMenuItems.data.map((item : EntityType<MenuItemType> , index : number) => {
                 return(
-                  <IconBox key={index} icon={item.icon} size={30} link={item.link} path={item.path} title={item.title} linkClassName={"gap-3.5 rounded-[5px] lg:border-[1px] lg:border-gray-300 py-2.5 basis-[calc(50%-8px)] justify-start pl-4 lg:hover:border-green-300 transition-all duration-300"} titleClassName={"text-heading-sm text-blue-300"}/>
+                  <IconBox key={index} icon={item.attributes.icon_name ?? ''} size={30} link={item.attributes.link} path={item.attributes.icon_path} title={item.attributes.title} linkClassName={"gap-3.5 rounded-[5px] lg:border-[1px] lg:border-gray-300 py-2.5 basis-[calc(50%-8px)] justify-start pl-4 lg:hover:border-green-300 transition-all duration-300"} titleClassName={"text-heading-sm text-blue-300"}/>
                 )
               })
             }
-
-            <IconBox icon={"icon-add"} size={24} title={"More Categories"}linkClassName={"m-auto mt-[17px] gap-4"} titleClassName={"text-heading-sm text-blue-300"} />
+            <IconBox icon={"icon-add"} link="#" size={24} title={"More Categories"} linkClassName={"px-5 pb-3 lg:m-auto bg-red-300 mt-[17px] gap-2"} titleClassName={"text-heading-sm text-blue-300"} />
           </div>
         </div>
+
       </div>
+
       <nav id="main_menu">
-        <ul className="flex flex-col lg:flex-row items-start lg:items-center text-heading6 lg:text-heading-sm 2xl:text-heading6 gap-[32px] mt-[32px] lg:mt-0 lg:gap-3 xl:gap-5 2xl:gap-10">
+        <ul className="flex flex-col lg:flex-row items-start lg:items-center text-heading6 lg:text-heading-sm 2xl:text-heading6 gap-[32px] pb-6 lg:pb-0 mt-[32px] lg:mt-0 lg:gap-3 xl:gap-5 2xl:gap-10">
             {
-              mainMenuItems && mainMenuItems.data.map((item : EntityType<MenuItemType> , index) => {
+              mainMenuItems &&
+              mainMenuItems.data.map((item : EntityType<MenuItemType> , index) => {
                 return (
                   <li key={index} className="opacity-80 hover:opacity-100 transition-all duration-200">
                     {
@@ -68,26 +70,6 @@ export function Menu() {
             }
         </ul>
       </nav>
-
-      {/*
-      <nav id="main_menu">
-        <ul className="flex flex-col lg:flex-row items-start lg:items-center text-heading6 lg:text-heading-sm 2xl:text-heading6 gap-[32px] mt-[32px] lg:mt-0 lg:gap-3 xl:gap-5 2xl:gap-10">
-            {
-              menuMock.map((item , index) => {
-                return (
-                  <li key={index} className="opacity-80 hover:opacity-100 transition-all duration-200">
-                    {
-                      item.icon ?
-                        <IconBox {...item} titleClassName={"text-heading6 lg:text-heading-sm xl:text-heading6"}/>
-                        : <Link href={item.link} className="flex items-center gap-1">{item.title}</Link>
-                    }
-                  </li>
-                )
-              })
-            }
-        </ul>
-      </nav> 
-      */}
     </>
   )
 }
