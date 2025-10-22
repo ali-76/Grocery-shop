@@ -1,5 +1,5 @@
 import ApiResponseType from "@/types/api/Response";
-import apiClient from "./ApiClient";
+import apiClient from "./config/ApiClient";
 import { MenuType } from "@/types";
 
 

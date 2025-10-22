@@ -1,4 +1,5 @@
-import { getMenuApiCall } from "@/api/config/Menu";
+
+import { getMenuApiCall } from "@/api/Menu";
 import { EntityType, MenuItemType, MenuType, PopulateType } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 
