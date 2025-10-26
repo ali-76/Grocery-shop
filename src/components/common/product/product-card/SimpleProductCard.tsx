@@ -1,4 +1,3 @@
-import { simpleProductType } from "@/types/simpleProductType";
 import { Badge, IconBox, Rating } from "@/components";
 import { ImageView } from "@/components";
 import Link from "next/link";

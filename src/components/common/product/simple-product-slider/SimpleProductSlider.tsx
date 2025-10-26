@@ -1,7 +1,6 @@
 import { SimpleProductCard } from "@/components/common";
 import { ProductType } from "@/types/api/Product";
-import ApiResponseType, { EntityType, PopulateType } from "@/types/api/Response";
-import { simpleProductType } from "@/types/simpleProductType";
+import { EntityType } from "@/types/api/Response";
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 

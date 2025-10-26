@@ -1,4 +1,4 @@
-import { Banner, BottomSlider, DealsOfTheDaysSlider, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
+import { Banner, BestSellerSliders, BottomSlider, DealsOfTheDaysSlider, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
 import { dealsOfTheDaysMock } from "@/mock/dealsOfTheDays";
 import { useQuery } from "@tanstack/react-query";
 import { getAllProductsApiCall } from "@/api/Product";
@@ -7,9 +7,26 @@ import { ProductType } from "@/types/api/Product";
 
 export default function Home() {
 
-  const {data : PopularProducts} = useQuery<ApiResponseType<ProductType>>({queryKey : [getAllProductsApiCall.name , 'popular_product'] , queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular : true}})})
-  const {data : PopularFruit} = useQuery<ApiResponseType<ProductType>>({queryKey : [getAllProductsApiCall.name , 'popular_fruit' ] , queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular_fruit : true}})})
+  const {data : PopularProductsData} = useQuery<ApiResponseType<ProductType>>({
+    queryKey : [getAllProductsApiCall.name , 'popular_product'],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular : true}})
+  })
+
+  const {data : ProductsData} = useQuery<ApiResponseType<ProductType>>({
+    queryKey : [getAllProductsApiCall.name , 'popular_fruit' ],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular_fruit : true}})
+  })
+
+  const {data : bestSellerProductsData} = useQuery<ApiResponseType<ProductType>>({
+    queryKey: [getAllProductsApiCall.name , "best_seller"],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] , filters : {is_best_seller : true , total : 0}})
+  }) 
   
+  console.log(bestSellerProductsData?.data);
+
+
+  
+
   return (
     <main>
       <Section>
@@ -39,7 +56,7 @@ export default function Home() {
           </div>
         </div>
         {
-          PopularProducts && <SimpleProductSlider items={PopularProducts.data} nextEl={".swiper-nav-right"} prevEl={".swiper-nav-left"}/>
+          PopularProductsData && <SimpleProductSlider items={PopularProductsData.data} nextEl={".swiper-nav-right"} prevEl={".swiper-nav-left"}/>
         }
       </Section>
 
@@ -52,7 +69,7 @@ export default function Home() {
           </div>
         </div>
         {
-          PopularFruit && <SimpleProductSlider items={PopularFruit.data} nextEl={".swiper-nav-right2"} prevEl={".swiper-nav-left2"}/>
+          ProductsData && <SimpleProductSlider items={ProductsData.data} nextEl={".swiper-nav-right2"} prevEl={".swiper-nav-left2"}/>
         }
       </Section>
 
@@ -68,7 +85,12 @@ export default function Home() {
               <i className="icon-arrow-small-right text-[24px]"></i>
             </a>
           </div>
-          {/* <BestSellerSliders items={bestSellersProductMock}/> */}
+          {
+            bestSellerProductsData && 
+            <div className="flex-grow">
+              <BestSellerSliders items={bestSellerProductsData.data}/>
+            </div>
+          }
         </div>
       </Section>
       

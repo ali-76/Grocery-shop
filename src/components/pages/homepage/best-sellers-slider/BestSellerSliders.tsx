@@ -1,10 +1,12 @@
 import { SimpleProductCard } from "@/components/common";
+import { EntityType, PopulateType } from "@/types";
+import { ProductType } from "@/types/api/Product";
 import { simpleProductType } from "@/types/simpleProductType";
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface Props  {
-  items : simpleProductType[];
+  items : Array<EntityType<ProductType>>;
 }
 
 export function BestSellerSliders({items} : Props) {
@@ -40,7 +42,7 @@ export function BestSellerSliders({items} : Props) {
         >
             
             {
-                items.map((itemCard : simpleProductType , index : number) => {
+                items.map((itemCard : any , index : number) => {
                     return(
                         <SwiperSlide key={index}>
                             <SimpleProductCard item={itemCard}/>
