@@ -1,15 +1,18 @@
 import { SimpleProductCard } from "@/components/common";
+import { ProductType } from "@/types/api/Product";
+import ApiResponseType, { EntityType, PopulateType } from "@/types/api/Response";
 import { simpleProductType } from "@/types/simpleProductType";
 import { Autoplay, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface Props  {
-  items : simpleProductType[];
+  items : Array<EntityType<ProductType>>;
   nextEl? : string;
   prevEl? : string;
 }
 
 export function SimpleProductSlider({items , nextEl , prevEl} : Props) {
+  
    return (
         <Swiper
         modules={[Autoplay , Navigation]}
@@ -40,15 +43,14 @@ export function SimpleProductSlider({items , nextEl , prevEl} : Props) {
           }
         }}
         >
-            
             {
-                items.map((itemCard : simpleProductType , index : number) => {
-                    return(
-                        <SwiperSlide key={index}>
-                            <SimpleProductCard item={itemCard}/>
-                        </SwiperSlide>
-                    )
-                })
+              items && items.map((itemCard : EntityType<ProductType> , index : number) => {                
+                  return(
+                      <SwiperSlide key={index}>
+                          <SimpleProductCard item={itemCard}/>
+                      </SwiperSlide>
+                  )
+              })
             }
         </Swiper>
     );

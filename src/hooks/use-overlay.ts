@@ -1,4 +1,4 @@
-import { useEffect, KeyboardEvent } from "react";
+import  { useEffect } from "react";
 
 interface Props {
     onClick : ()=> void;
@@ -6,6 +6,7 @@ interface Props {
 }
 
 export function useOverlay({onClick , isOverflowHidden = false} : Props){
+
     useEffect(()=>{
         const clickHandler = () => onClick();
        
@@ -15,16 +16,20 @@ export function useOverlay({onClick , isOverflowHidden = false} : Props){
     },[])
 
     useEffect(()=>{
-        const handleKey = (e: globalThis.KeyboardEvent) => {
+        const handleKey = (e: KeyboardEvent) => {
           if(e.key === "Escape"){
-            onClick()     
+            onClick();   
           }
         };
-    
-        document.body.addEventListener("keyup" , handleKey)
+
+        if(isOverflowHidden){
+            document.body.addEventListener("keyup" , handleKey)
+        }else{
+            document.body.removeEventListener("keyup" , handleKey)
+        }
     
         return () => document.body.removeEventListener("keyup" , handleKey)
-      }, [])
+    }, [isOverflowHidden])
 
     useEffect(() => {
         if(isOverflowHidden){

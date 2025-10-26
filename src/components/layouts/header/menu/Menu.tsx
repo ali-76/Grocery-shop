@@ -7,7 +7,6 @@ import { useOverlay } from "@/hooks/use-overlay";
 
 
 export function Menu() {
-
   const {data : mainMenuItems} = useMenu({position : "main_menu"})
   const {data : categoryMenuItems } = useMenu({position : "brows-category"})
 
@@ -17,6 +16,7 @@ export function Menu() {
     onClick(){
       setShowCategoryMenu(false);
     },
+    isOverflowHidden : showCategoryMenu
   })
 
   function categoryBtnClickHandler (e : React.MouseEvent<HTMLDivElement>){

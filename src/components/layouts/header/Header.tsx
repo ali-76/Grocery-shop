@@ -16,7 +16,7 @@ export function Header() {
 
   const menuBtnClickHandler = (e:React.MouseEvent<HTMLButtonElement>) =>{
     e.stopPropagation();
-    setShowMobileMenu((prevState) => !prevState)
+    setShowMobileMenu((prevState) => !prevState)    
   }
 
   const menuBodyClickHandler = (e:React.MouseEvent<HTMLDivElement>) =>{

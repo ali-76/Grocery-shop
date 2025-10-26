@@ -1,10 +1,15 @@
-import { Banner, BestSellerSliders, BottomSlider, DealsOfTheDaysSlider, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
-import { popularProductMock } from "@/mock/popularProduct";
-import { popularFruitMock } from "@/mock/popularFruit";
-import { bestSellersProductMock } from "@/mock/bestSellersProduct";
+import { Banner, BottomSlider, DealsOfTheDaysSlider, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
 import { dealsOfTheDaysMock } from "@/mock/dealsOfTheDays";
+import { useQuery } from "@tanstack/react-query";
+import { getAllProductsApiCall } from "@/api/Product";
+import ApiResponseType from "@/types/api/Response";
+import { ProductType } from "@/types/api/Product";
 
 export default function Home() {
+
+  const {data : PopularProducts} = useQuery<ApiResponseType<ProductType>>({queryKey : [getAllProductsApiCall.name , 'popular_product'] , queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular : true}})})
+  const {data : PopularFruit} = useQuery<ApiResponseType<ProductType>>({queryKey : [getAllProductsApiCall.name , 'popular_fruit' ] , queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular_fruit : true}})})
+  
   return (
     <main>
       <Section>
@@ -33,7 +38,9 @@ export default function Home() {
             <IconBox icon="icon-angle-small-right" iconClassName="swiper-nav-right cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white" size={24} />
           </div>
         </div>
-        <SimpleProductSlider items={popularProductMock} nextEl={".swiper-nav-right"} prevEl={".swiper-nav-left"}/>
+        {
+          PopularProducts && <SimpleProductSlider items={PopularProducts.data} nextEl={".swiper-nav-right"} prevEl={".swiper-nav-left"}/>
+        }
       </Section>
 
       <Section>
@@ -44,7 +51,9 @@ export default function Home() {
             <IconBox icon="icon-angle-small-right" iconClassName="swiper-nav-right2 cursor-pointer bg-gray-100 p-2 rounded-full text-gray-500 hover:bg-green-200 hover:text-white" size={24} />
           </div>
         </div>
-        <SimpleProductSlider items={popularFruitMock} nextEl={".swiper-nav-right2"} prevEl={".swiper-nav-left2"}/>
+        {
+          PopularFruit && <SimpleProductSlider items={PopularFruit.data} nextEl={".swiper-nav-right2"} prevEl={".swiper-nav-left2"}/>
+        }
       </Section>
 
       <Section>
@@ -59,7 +68,7 @@ export default function Home() {
               <i className="icon-arrow-small-right text-[24px]"></i>
             </a>
           </div>
-          <BestSellerSliders items={bestSellersProductMock}/>
+          {/* <BestSellerSliders items={bestSellersProductMock}/> */}
         </div>
       </Section>
       
