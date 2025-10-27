@@ -9,20 +9,25 @@ export default function Home() {
 
   const {data : PopularProductsData} = useQuery<ApiResponseType<ProductType>>({
     queryKey : [getAllProductsApiCall.name , 'popular_product'],
-    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular : true}})
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular : {$eq : true}}})
   })
 
   const {data : ProductsData} = useQuery<ApiResponseType<ProductType>>({
     queryKey : [getAllProductsApiCall.name , 'popular_fruit' ],
-    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular_fruit : true}})
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular_fruit : {$eq : true}}})
   })
 
   const {data : bestSellerProductsData} = useQuery<ApiResponseType<ProductType>>({
     queryKey: [getAllProductsApiCall.name , "best_seller"],
-    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] , filters : {is_best_seller : true , total : 0}})
-  }) 
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] , filters : {is_best_seller : {$eq : true} , total : {$gt : 0}}})
+  })
   
-  console.log(bestSellerProductsData?.data);
+  const {data : dealsOfTheDaysProductsData} = useQuery({
+    queryKey : [getAllProductsApiCall.name , "deals_of_days"],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail"] , filters : {discount_expire_date : {$notNull : true}}})
+  })  
+
+
 
 
   
@@ -101,7 +106,7 @@ export default function Home() {
           <h2 className="text-heading6 md:text-heading5 lg:text-heading4 xl:text-heading3 text-blue-300">Deals Of The Days</h2>
           <a className="flex items-center" href="#">All Deals <i className="icon-angle-small-right text-[24px]"></i></a>
         </div>
-        <DealsOfTheDaysSlider items={dealsOfTheDaysMock}/>
+        {dealsOfTheDaysProductsData && <DealsOfTheDaysSlider items={dealsOfTheDaysProductsData?.data}/>}
       </Section>
 
       <Section>

@@ -1,6 +1,6 @@
 
-export const timerHelper = (end : number) => {
-    const endDate = new Date(end).getTime();
+export const timerHelper = (end : string) => {
+    const endDate = new Date(end).getTime() + (500 * 24 * 60 * 60 * 1000);
     const currentDate = new Date().getTime();
 
     const timeRemaining = endDate - currentDate;
