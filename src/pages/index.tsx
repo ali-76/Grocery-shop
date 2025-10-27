@@ -87,8 +87,10 @@ export default function Home() {
           </div>
           {
             bestSellerProductsData && 
-            <div className="flex-grow">
-              <BestSellerSliders items={bestSellerProductsData.data}/>
+            <div className="flex-grow w-full min-w-0">
+              <div>
+                <BestSellerSliders items={bestSellerProductsData.data}/>
+              </div>
             </div>
           }
         </div>
