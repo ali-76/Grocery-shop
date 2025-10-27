@@ -3,9 +3,10 @@ import  { useEffect } from "react";
 interface Props {
     onClick : ()=> void;
     isOverflowHidden? : boolean;
+    isDropdownOpen? : boolean;
 }
 
-export function useOverlay({onClick , isOverflowHidden = false} : Props){
+export function useOverlay({onClick , isOverflowHidden = false , isDropdownOpen = false} : Props){
 
     useEffect(()=>{
         const clickHandler = () => onClick();
@@ -22,14 +23,14 @@ export function useOverlay({onClick , isOverflowHidden = false} : Props){
           }
         };
 
-        if(isOverflowHidden){
+        if(isDropdownOpen){
             document.body.addEventListener("keyup" , handleKey)
         }else{
             document.body.removeEventListener("keyup" , handleKey)
         }
     
         return () => document.body.removeEventListener("keyup" , handleKey)
-    }, [isOverflowHidden])
+    }, [isDropdownOpen])
 
     useEffect(() => {
         if(isOverflowHidden){

@@ -11,7 +11,8 @@ export function Header() {
     onClick() {
       setShowMobileMenu(false);
     },
-    isOverflowHidden : showMobileMenu
+    isOverflowHidden : showMobileMenu,
+    isDropdownOpen : showMobileMenu,
   })
 
   const menuBtnClickHandler = (e:React.MouseEvent<HTMLButtonElement>) =>{

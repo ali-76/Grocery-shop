@@ -11,17 +11,20 @@ export function Menu() {
   const {data : categoryMenuItems } = useMenu({position : "brows-category"})
 
   let [showCategoryMenu , setShowCategoryMenu] = useState<boolean>(false)
+  let [isDropdownOpen , setIsDropdownOpen] = useState<boolean>(false)
 
   useOverlay({
     onClick(){
       setShowCategoryMenu(false);
+      setIsDropdownOpen(false);
     },
-    isOverflowHidden : showCategoryMenu
+    isDropdownOpen: isDropdownOpen,
   })
 
   function categoryBtnClickHandler (e : React.MouseEvent<HTMLDivElement>){
     e.stopPropagation()    
     setShowCategoryMenu((prevState) => !prevState)
+    setIsDropdownOpen((prevState) => !prevState)
   }
 
   function categoryBodyClickHandler (e : React.MouseEvent<HTMLDivElement>){
