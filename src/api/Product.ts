@@ -6,15 +6,24 @@ import apiClient from "./config/ApiClient";
 interface Props {
     populate? : Array<"thumbnail" | "categories" | "gallery">
     filters? : {};
+    sort? : Array<string>;
+    pagination? : {
+        withCount? : boolean,
+        page? : number,
+        pageSize? : number,
+        start? : number,
+        limit? : number,
+    }
 }
 
-export async function getAllProductsApiCall({populate , filters} : Props) : Promise<ApiResponseType<ProductType>>{
+export async function getAllProductsApiCall({populate , filters , sort , pagination} : Props) : Promise<ApiResponseType<ProductType>>{
 
     return await apiClient.get("/products" , {
         params: {
             populate : populate?.join(","),
-            filters: filters
-            },
-        }
-    )
+            filters: filters,
+            sort : sort,
+            pagination : pagination,
+        },
+    })
 }

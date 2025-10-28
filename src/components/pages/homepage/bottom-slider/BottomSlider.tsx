@@ -1,17 +1,64 @@
 import { ProductVerticalList } from "@/components/common";
-import { simpleProductType } from "@/types/simpleProductType";
 import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { productVerticalType } from "@/types/productVerticalType";
-import {topSellingMock} from '@/mock/topSelling';
-import {trendingProductMock} from '@/mock/trendingProduct';
-import {recentlyAddedMock} from '@/mock/recentlyAdded';
-import {topRatedMock} from '@/mock/topRated';
+import { useQuery } from "@tanstack/react-query";
+import ApiResponseType from "@/types/api/Response";
+import { ProductType } from "@/types/api/Product";
+import { getAllProductsApiCall } from "@/api/Product";
 
 
 
 export function BottomSlider() {
+
+    const {data : recentlyAdded} = useQuery({
+        queryKey : [getAllProductsApiCall.name , "recentlyAdded"],
+        queryFn : () => getAllProductsApiCall({
+            populate : ["thumbnail"],
+            pagination : {
+                pageSize : 3
+            }
+        })
+    })
+
+    const {data : isTopSelling} = useQuery<ApiResponseType<ProductType>>({
+        queryKey : [getAllProductsApiCall.name , "isTopSelling"],
+        queryFn : () => getAllProductsApiCall({
+            populate : ["thumbnail"],
+            filters : {is_top_selling : {$eq : true}},
+            pagination : {
+                pageSize : 3,
+            }
+        })
+    })
+
+    const {data : isTrending} = useQuery<ApiResponseType<ProductType>>({
+        queryKey : [getAllProductsApiCall.name , "isTrending"],
+        queryFn : () => getAllProductsApiCall({
+           populate : ["thumbnail"],
+           filters : {is_trending : {$eq : true}},
+           pagination : {
+            pageSize : 3
+           }
+        })
+    })
+
+    const {data : topRated} = useQuery<ApiResponseType<ProductType>>({
+        queryKey : [getAllProductsApiCall.name , "rated"],
+        queryFn : () => getAllProductsApiCall({
+            populate : ["thumbnail"],
+            sort : ["rate:desc"],
+            pagination : {
+                // page : 1,
+                // pageSize : 3,
+                start : 0,
+                limit : 3,
+            }
+        })
+    })
+
+    console.log(isTopSelling?.data);
+
 
    return (
         <Swiper
@@ -41,19 +88,19 @@ export function BottomSlider() {
         >
 
             <SwiperSlide className="mt-[47px]">
-                <ProductVerticalList itemCards={topSellingMock} title={'Top Selling'}/>
+                {isTopSelling && <ProductVerticalList itemCards={isTopSelling} title={'Top Selling'}/>}
             </SwiperSlide>
 
             <SwiperSlide className="mt-[47px]">
-                <ProductVerticalList itemCards={trendingProductMock} title={'Trending Products'}/>
+                {isTrending && <ProductVerticalList itemCards={isTrending} title={'Trending Products'}/>}
             </SwiperSlide>
 
             <SwiperSlide className="mt-[47px]">
-                <ProductVerticalList itemCards={recentlyAddedMock} title={'Recently Added'}/>
+                {recentlyAdded && <ProductVerticalList itemCards={recentlyAdded} title={'Recently Added'}/>}
             </SwiperSlide>
 
             <SwiperSlide className="mt-[47px]">
-                <ProductVerticalList itemCards={topRatedMock} title={'Top Rated'}/>
+                {topRated && <ProductVerticalList itemCards={topRated} title={'Top Rated'}/>}
             </SwiperSlide>
             
         </Swiper>
