@@ -16,7 +16,7 @@ interface Props {
     }
 }
 
-export async function getAllProductsApiCall({populate , filters , sort , pagination} : Props) : Promise<ApiResponseType<ProductType>>{
+export async function getAllProductsApiCall({populate , filters = {} , sort = [] , pagination = {}} : Props) : Promise<ApiResponseType<ProductType>>{
 
     return await apiClient.get("/products" , {
         params: {
