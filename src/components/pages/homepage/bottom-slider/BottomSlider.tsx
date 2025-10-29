@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import ApiResponseType from "@/types/api/Response";
 import { ProductType } from "@/types/api/Product";
 import { getAllProductsApiCall } from "@/api/Product";
-import { InView, useInView } from 'react-intersection-observer';
+import { useInView } from 'react-intersection-observer';
 import { useEffect } from "react";
 
 
@@ -81,6 +81,7 @@ export function BottomSlider() {
             refetchIsTopSelling();
             refetchIsTrending();
             refetchTopRated();
+            console.log("inView : " + inView);
         }
     },[inView])
 

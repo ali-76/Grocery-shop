@@ -1,9 +1,11 @@
 import { Banner, BestSellerSliders, BottomSlider, DealsOfTheDaysSlider, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
 import { dealsOfTheDaysMock } from "@/mock/dealsOfTheDays";
-import { useQuery } from "@tanstack/react-query";
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { getAllProductsApiCall } from "@/api/Product";
 import ApiResponseType from "@/types/api/Response";
 import { ProductType } from "@/types/api/Product";
+import { getMenuApiCall } from "@/api/Menu";
+import { getFeaturedCategory } from "@/api/Category";
 
 export default function Home() {
 
@@ -114,4 +116,66 @@ export default function Home() {
       </Section>
     </main>
   );
+}
+
+
+
+export async function getServerSideProps() {
+  const queryClient = new QueryClient()
+
+  // for menu
+  await queryClient.prefetchQuery({
+    queryKey: [getMenuApiCall.name],
+    queryFn: getMenuApiCall,
+  })
+  
+  // for FeaturedCategories
+  await queryClient.prefetchQuery({
+    queryKey: [getFeaturedCategory.name],
+    queryFn: () => getFeaturedCategory()
+  })
+  
+  // for popular product
+  await queryClient.prefetchQuery({
+    queryKey : [getAllProductsApiCall.name , 'popular_product'],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular : {$eq : true}}})
+  })
+  
+  // for popular fruit
+  await queryClient.prefetchQuery({
+    queryKey : [getAllProductsApiCall.name , 'popular_fruit' ],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] ,filters : {is_popular_fruit : {$eq : true}}})
+  })
+  
+  // for best seller
+  await queryClient.prefetchQuery({
+    queryKey: [getAllProductsApiCall.name , "best_seller"],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail" , "categories"] , filters : {is_best_seller : {$eq : true} , total : {$gt : 0}}})
+  })
+  
+  // for deals of days
+  await queryClient.prefetchQuery({
+    queryKey : [getAllProductsApiCall.name , "deals_of_days"],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail"] , filters : {discount_expire_date : {$notNull : true}}})
+  })
+
+  // for bottom slider
+  await queryClient.prefetchQuery({
+    queryKey: [getAllProductsApiCall.name , "recentlyAdded"],
+    queryFn: () => getAllProductsApiCall({populate : ["thumbnail"], pagination : { page : 1, pageSize : 3, withCount : false}}),
+  })
+  await queryClient.prefetchQuery({
+    queryKey: [getAllProductsApiCall.name , "isTopSelling"],
+    queryFn : () => getAllProductsApiCall({ populate : ["thumbnail"], filters : {is_top_selling : {$eq : true}}, pagination : { page : 1, pageSize : 3, withCount : false}})
+  })
+  await queryClient.prefetchQuery({
+    queryKey : [getAllProductsApiCall.name , "isTrending"],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail"], filters : {is_trending : {$eq : true}}, pagination : {page : 1,pageSize : 3,withCount : false}})
+  })
+  await queryClient.prefetchQuery({
+    queryKey : [getAllProductsApiCall.name , "rated"],
+    queryFn : () => getAllProductsApiCall({populate : ["thumbnail"],sort : ["rate:desc"],pagination : {start : 0,limit : 3,withCount : false}})
+  })
+
+  return { props: { dehydratedState: dehydrate(queryClient) } }
 }
