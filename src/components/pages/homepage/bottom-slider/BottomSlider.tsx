@@ -81,7 +81,6 @@ export function BottomSlider() {
             refetchIsTopSelling();
             refetchIsTrending();
             refetchTopRated();
-            console.log("inView : " + inView);
         }
     },[inView])
 
