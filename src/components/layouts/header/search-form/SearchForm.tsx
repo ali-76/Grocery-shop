@@ -59,14 +59,14 @@ export function SearchForm({inputClassName} : Props) {
     }
   },[searchText])
 
-  const focusInput = useCallback(()=> setIsSearched(true), []);
-  const blurInput = useCallback(()=> setIsSearched(false), [])
+  const focusInput = ()=> setIsSearched(true);
+  const blurInput = ()=> setIsSearched(false);
 
-  const handleKeyDown = useCallback((e:React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
     if(e.key === "Escape"){
       e.currentTarget.blur();
     }
-  }, []);
+  };
 
   const hasResults = resultData.length > 0;
     
