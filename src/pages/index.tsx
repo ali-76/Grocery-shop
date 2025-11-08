@@ -1,5 +1,4 @@
 import { Banner, BestSellerSliders, BottomSlider, DealsOfTheDaysSlider, FeaturedCategories, IconBox, MiniProductSlider, Section, SimpleProductSlider } from "@/components";
-import { dealsOfTheDaysMock } from "@/mock/dealsOfTheDays";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { getAllProductsApiCall } from "@/api/Product";
 import ApiResponseType from "@/types/api/Response";
