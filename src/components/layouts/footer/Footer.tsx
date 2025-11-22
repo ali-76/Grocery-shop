@@ -11,7 +11,6 @@ export function Footer() {
             <h2 className="max-w-[60%] text-heading5 sm:text-heading4 md:text-heading3 lg:text-heading2 tracking-[-0.04%] text-blue-300">Stay home & get your daily needs from our shop</h2>
             <div className="font-lato text-large tracking-[-0.04%] text-[#2B3D34] mt-8 hidden lg:block">Start Your Daily Sopping with Nest Mart</div>
           </div>
-          {/* <ImageView src="/assets/images/Screenshot (76).png" alt="banner" width={587} height={331} className="absolute bottom-0 right-0 sm:h-full h-3/4" /> */}
           <div className="absolute bottom-0 right-0 sm:h-full h-3/4 min-w-[180px] w-[50%]">
             <ImageView src="/assets/images/Screenshot (76).png" alt="banner" fill={true} className="object-contain" />
           </div>

@@ -1,11 +1,14 @@
-import { IconBox, Logo, Menu, SearchForm } from "@/components"
+import { IconBox, LoginModal, Logo, Menu, RegisterModal, SearchForm } from "@/components"
 import { useOverlay } from "@/hooks/use-overlay"
+import { useModal } from "@/store/ModalContext"
 import Link from "next/link"
 import React, { useState } from "react"
 
 export function Header() {
 
   const [showMobileMenu , setShowMobileMenu] = useState<boolean>(false)
+
+  const {currentModal, openModal, closeModal} = useModal()
 
   useOverlay({
     onClick() {
@@ -26,6 +29,8 @@ export function Header() {
 
   return (
     <header className="mb-[33px]">
+      {currentModal === "login" && <LoginModal/>}
+      {currentModal === "register" && <RegisterModal/>}
 
       <div className="container flex items-center justify-between py-4 md:py-6 xl:py-8">
 
@@ -36,7 +41,7 @@ export function Header() {
         </div>
 
         <ul className="hidden lg:flex gap-5">
-          <li>
+          <li onClick={()=>{openModal("login")}}>
             <IconBox icon={"icon-user"} link="#" size={24} title={"Account"} linkClassName={"gap-2"} titleClassName={"text-medium text-gray-500 font-lato"} hideOnMobile = {true} />
           </li>
           <li>

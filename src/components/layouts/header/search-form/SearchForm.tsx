@@ -97,7 +97,7 @@ export function SearchForm({inputClassName} : Props) {
 
       {
         isSearched &&
-        <div className="absolute top-full mt-2 -left-4 -right-4 bg-white z-10 rounded-md border overflow-hidden max-h-40 overflow-y-auto">
+        <div className="absolute top-full mt-2 -left-2 lg:-left-4 -right-2 lg:-right-4 bg-white z-10 rounded-md border overflow-hidden max-h-40 overflow-y-auto">
           <ul>
             {
               hasResults ?
